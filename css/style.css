@@ -154,11 +154,11 @@ h6 {
     }
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
     #main {
         margin-left: 100px;
     }
-}
+} */
 
 
 /*--------------------------------------------------------------
@@ -822,6 +822,12 @@ section {
 
 .portfolio-details .portfolio-description h2 {
     font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.portfolio-details .portfolio-title h1 {
+    font-size: 40px;
     font-weight: 700;
     margin-bottom: 20px;
 }

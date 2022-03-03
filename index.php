@@ -1,5 +1,25 @@
+<?php
+
+    if ($_POST) {
+        $lang = $_POST['lang'];
+    }
+
+    else {
+        $lang = $_COOKIE['lang'] ?? 'fr';
+    }
+
+    setcookie('lang', $lang);
+
+    function _read($data, $lang) {
+        $content = file_get_contents('lang/' . $lang . '.json');
+        $json = json_decode($content, true);
+
+        echo $json[$data];
+    }
+?>
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?php echo $lang; ?>">
 
 <head>
     <meta charset="utf-8">
@@ -36,17 +56,27 @@
     <!-- ======= Header ======= -->
     <header id="header" class="d-flex flex-column justify-content-center">
 
+        <div style="position: fixed; top: 10px; right: 10px;">
+            <form method="POST" action="">
+                <label for="lang"></label>
+                <select id="lang" name="lang" class="custom-select" style="border-color: darkgrey; border-radius: 5px;" onchange="this.form.submit()">
+                    <option value="fr" <?php if($lang == 'fr') echo 'selected'; ?> id="FR"></option>
+                    <option value="en" <?php if($lang == 'en') echo 'selected'; ?> id="EN"></option>
+                </select>
+            </form>
+        </div>
+
         <nav id="navbar" class="navbar nav-menu">
             <ul>
-                <li><a href="#hero" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Accueil</span></a></li>
-                <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>A propos</span></a></li>
+                <li><a href="#hero" class="nav-link scrollto"><i class="bx bx-home"></i> <span><?php _read('home', $lang); ?></span></a></li>
+                <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span><?php _read('about', $lang); ?></span></a></li>
                 <li><a href="#skills" class="nav-link scrollto"><i class="bx bx-briefcase-alt-2"></i>
-                        <span>Compétences</span></a></li>
-                <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file"></i> <span>Mon CV</span></a></li>
-                <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-wallet"></i> <span>Projets</span></a>
+                        <span><?php _read('skills', $lang); ?></span></a></li>
+                <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file"></i> <span><?php _read('cv', $lang); ?></span></a></li>
+                <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-wallet"></i> <span><?php _read('projects', $lang); ?></span></a>
                 </li>
                 <li><a href="#services" class="nav-link scrollto"><i class="bx bxs-graduation"></i>
-                        <span>Distinctions</span></a></li>
+                        <span><?php _read('honors', $lang); ?></span></a></li>
                 <!-- <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li> -->
             </ul>
         </nav>
@@ -60,8 +90,8 @@
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
             <h1>Agbetogor Germain</h1>
             <h1 class="mt-4" style="color: #0563bb">Germinator</h1>
-            <p>Je suis <span class="typed"
-                    data-typed-items="Développeur Web, Développeur API, Développeur Mobile"></span></p>
+            <p><?php _read('me', $lang); ?> <span class="typed"
+                    data-typed-items="<?php _read('dev', $lang); ?> Web, <?php _read('dev', $lang); ?> API, <?php _read('dev', $lang); ?> Mobile"></span></p>
             <div class="social-links">
                 <a href="#" class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
                 <!-- <a href="#" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a> -->
@@ -81,7 +111,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>A propos de moi</h2>
+                    <h2><?php _read('about-m', $lang); ?></h2>
                 </div>
 
                 <div class="row">
@@ -89,15 +119,15 @@
                         <img src="images/profile.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-8 pt-4 pt-lg-0 content">
-                        <h3>Developpeur FullStack Web &amp; Mobile.</h3>
+                        <h3><?php _read('dev', $lang); ?> FullStack Web &amp; Mobile.</h3>
                         <div class="row mt-5">
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bx bx-chevron-right"></i> <strong>Date de naissance :</strong>
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('birthday', $lang); ?> :</strong>
                                         <span>28 Mai 1997</span></li>
-                                    <li><i class="bx bx-chevron-right"></i> <strong>Numéro de téléphone :</strong>
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('phone', $lang); ?> :</strong>
                                         <span>+225 07 49 01 29 66</span></li>
-                                    <li><i class="bx bx-chevron-right"></i> <strong>Adresse :</strong> <span>Abidjan,
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('address', $lang); ?> :</strong> <span>Abidjan,
                                             Côte-d'Ivoire</span></li>
                                     <li><i class="bx bx-chevron-right"></i> <strong>Employeur :</strong>
                                         <span>CinetPay</span></li>
@@ -105,11 +135,10 @@
                             </div>
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bx bx-chevron-right"></i> <strong>Age :</strong> <span>24 ans</span>
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('age', $lang); ?> :</strong> <span>24 <?php _read('old', $lang); ?></span>
                                     </li>
-                                    <li><i class="bx bx-chevron-right"></i> <strong>Niveau :</strong> <span>Ingénieur en
-                                            Informatique (BAC +5)</span></li>
-                                    <li><i class="bx bx-chevron-right"></i> <strong>Adresse email :</strong>
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('level', $lang); ?> :</strong> <span><?php _read('software', $lang); ?></span></li>
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('email', $lang); ?> :</strong>
                                         <span>agbegermain@gmail.com</span></li>
                                     <li><i class="bx bx-chevron-right"></i> <strong>Freelance :</strong> <span>Sinka
                                             Codes</span></li>
@@ -128,7 +157,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Compétences</h2>
+                    <h2><?php _read('skills', $lang); ?></h2>
                 </div>
 
                 <div class="row skills-content">
@@ -232,43 +261,41 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Curiculum Vitae</h2>
+                    <h2><?php _read('cv-m', $lang); ?></h2>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <h3 class="resume-title">Formation Académique</h3>
+                        <h3 class="resume-title"><?php _read('formation-s', $lang); ?></h3>
                         <div class="resume-item">
-                            <h4>Ingénieur</h4>
+                            <h4><?php _read('engineer', $lang); ?></h4>
                             <h5>2016 - 2019</h5>
-                            <p><em>Science des Technologies de l'Information et de la Communication (STIC), École
-                                    Supérieure d’Industrie (ESI), Institut National Polytechnique Houphouët Boigny
-                                    (INP-HB), Côte-d'Ivoire</em></p>
-                            <p>Cycle ingénieur, en passant par les classes préparatoires technologiques (INP-HB/CPGE)
+                            <p><em><?php _read('engineer-c', $lang); ?></em></p>
+                            <p><?php _read('engineer-m', $lang); ?>
                             </p>
                         </div>
                         <div class="resume-item">
-                            <h4>Bachelier </h4>
+                            <h4><?php _read('bachelor', $lang); ?></h4>
                             <h5>2010 - 2014</h5>
                             <p><em>Lycée Municipal de Port-Bouet, Abidjan, Côte-d'Ivoire</em></p>
-                            <p>Obtention du BAC série C avec mention Passable</p>
+                            <p><?php _read('bachelor-m', $lang); ?></p>
                         </div>
 
-                        <h3 class="resume-title">Projets Académiques</h3>
+                        <h3 class="resume-title"><?php _read('projects-s', $lang); ?></h3>
                         <div class="resume-item">
-                            <h4>Développements &amp; Designs</h4>
+                            <h4><?php _read('dev-m', $lang); ?> &amp; Designs</h4>
                             <h5>2016 - 2019</h5>
                             <ul>
-                                <li>Site d’échanges entre entreprises et étudiants/diplômés de l’INP-HB (Laravel).</li>
-                                <li>Application desktop de gestion des processus (.Net)</li>
-                                <li>Application desktop de discussion (.Net)</li>
-                                <li>Réalisation de maquettes d’application web & mobile (Balsamiq Mockups)</li>
-                                <li>Application desktop de gestion de données dans un fichier texte (Python)</li>
+                                <li><?php _read('school-1', $lang); ?></li>
+                                <li><?php _read('school-2', $lang); ?></li>
+                                <li><?php _read('school-3', $lang); ?></li>
+                                <li><?php _read('school-4', $lang); ?></li>
+                                <li><?php _read('school-5', $lang); ?></li>
                                 <li>Etc ...</li>
                             </ul>
                         </div>
 
-                        <h3 class="resume-title">Autres</h3>
+                        <h3 class="resume-title"><?php _read('others', $lang); ?></h3>
                         <div class="resume-item">
                             <h4>Divers </h4>
                             <p>Écoute Active, Bonne Communication, Motivation, Curiosité, Bonne Capacité de Rédaction de
@@ -276,41 +303,40 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <h3 class="resume-title">Experience Professionnelle</h3>
+                        <h3 class="resume-title"><?php _read('experience', $lang); ?></h3>
                         <div class="resume-item">
-                            <h4>Chargé d'études &amp; Développements</h4>
-                            <h5>2020 - Aujourd'hui</h5>
+                            <h4><?php _read('studies', $lang); ?> &amp; Développements</h4>
+                            <h5>2020 - <?php _read('today', $lang); ?></h5>
                             <p><em>CinetPay, Abidjan, Côte-d'Ivoire </em></p>
                             <ul>
-                                <li>Réalisations de cahiers de charges</li>
-                                <li>Réalisations d'offres techniques</li>
-                                <li>Réalisations d’études et modélisations de conceptions</li>
-                                <li>Réalisations de designs graphiques</li>
-                                <li>Développements Web (Front-Office & back-Office)</li>
-                                <li>Développements API</li>
-                                <li>Développements Mobile</li>
+                                <li><?php _read('cp-1', $lang); ?></li>
+                                <li><?php _read('cp-2', $lang); ?></li>
+                                <li><?php _read('cp-3', $lang); ?></li>
+                                <li><?php _read('cp-4', $lang); ?></li>
+                                <li><?php _read('dev-m', $lang); ?> Web (Front-Office & back-Office)</li>
+                                <li><?php _read('dev-m', $lang); ?> API</li>
+                                <li><?php _read('dev-m', $lang); ?> Mobile</li>
                             </ul>
                         </div>
                         <div class="resume-item">
-                            <h4>Chargé d'études</h4>
+                            <h4><?php _read('studies', $lang); ?></h4>
                             <h5>2019 - 2020</h5>
-                            <p><em>Orange IN (Intélligent Network), Abidjan, Côte-d'Ivoire</em></p>
+                            <p><em>Orange IN (Intelligent Network), Abidjan, Côte-d'Ivoire</em></p>
                             <ul>
-                                <li>Etude et intégration de l’OSG (Open System Gateway – Passerelle de développement de
-                                    services à valeur ajoutée télécoms)</li>
-                                <li>Etude et réalisation de l’extension capacitaire de la plateforme IN</li>
-                                <li>Etude et intégration des services ITOP (Share data, Transfert data, Ask data &
+                                <li><?php _read('orange-1', $lang); ?></li>
+                                <li><?php _read('orange-2', $lang); ?></li>
+                                <li><?php _read('orange-3', $lang); ?> (Share data, Transfer data, Ask data &
                                     Convert my data)</li>
-                                <li>Etude et mise en place des nouvelles conditions d’emprunt SOS Crédit</li>
+                                <li><?php _read('orange-4', $lang); ?></li>
                             </ul>
                         </div>
 
-                        <h3 class="resume-title">Autres</h3>
+                        <h3 class="resume-title"><?php _read('others', $lang); ?></h3>
                         <div class="resume-item">
-                            <h4>Langues</h4>
+                            <h4><?php _read('lang', $lang); ?></h4>
                             <ul>
-                                <li>Français (Bon Niveau / Écrit et Parlé)</li>
-                                <li>Anglais (Niveau Moyen / Écrit et Parlé)</li>
+                                <li><?php _read('lang-en', $lang); ?></li>
+                                <li><?php _read('lang-fr', $lang); ?></li>
                             </ul>
                         </div>
                         <div class="resume-item">
@@ -329,7 +355,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Projets</h2>
+                    <h2><?php _read('projects', $lang); ?></h2>
                 </div>
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
@@ -339,7 +365,7 @@
                             <img src="images/assurance.jpeg" class="img-fluid" alt="Mon Assurance (ASA-CI)">
                             <div class="portfolio-info">
                                 <h4>Mon Assurance (ASA-CI)</h4>
-                                <p>Pateforme Web</p>
+                                <p><?php _read('platform', $lang); ?> Web</p>
                                 <div class="portfolio-links">
                                     <a href="pages/asa-ci.html" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Mon Assurance (ASA-CI)"><i
@@ -354,7 +380,7 @@
                             <img src="images/olam.jpeg" class="img-fluid" alt="OLAM">
                             <div class="portfolio-info">
                                 <h4>OLAM</h4>
-                                <p>Pateforme Web</p>
+                                <p><?php _read('platform', $lang); ?> Web</p>
                                 <div class="portfolio-links">
                                     <a href="pages/olam.html" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="OLAM"><i class="bx bx-link"></i></a>
@@ -407,13 +433,13 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
-                            <img src="images/fraud.jpeg" class="img-fluid" alt="Fraudes Bancaires">
+                            <img src="images/fraud.jpeg" class="img-fluid" alt="<?php _read('frauds', $lang); ?>">
                             <div class="portfolio-info">
-                                <h4>CinetPay Fraudes Bancaires</h4>
+                                <h4>CinetPay <?php _read('frauds', $lang); ?></h4>
                                 <p>API</p>
                                 <div class="portfolio-links">
                                     <a href="pages/fraud.html" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Fraudes Bancaires"><i
+                                        data-glightbox="type: external" title="<?php _read('frauds', $lang); ?>"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -439,7 +465,7 @@
                             <img src="images/trombinoscope.png" class="img-fluid" alt="Trombinoscope">
                             <div class="portfolio-info">
                                 <h4>CinetPay Trombinoscope</h4>
-                                <p>Pateforme Web</p>
+                                <p><?php _read('platform', $lang); ?> Web</p>
                                 <div class="portfolio-links">
                                     <a href="pages/trombinoscope.html" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Trombinoscope"><i
@@ -498,7 +524,7 @@
                             <img src="https://mae.cinetpay.africa/assets/img/banner1.jpg" class="img-fluid" alt="MAE">
                             <div class="portfolio-info">
                                 <h4>MAE</h4>
-                                <p>Pateforme Web</p>
+                                <p><?php _read('platform', $lang); ?> Web</p>
                                 <div class="portfolio-links">
                                     <a href="pages/mae.html" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="MAE"><i class="bx bx-link"></i></a>
@@ -513,7 +539,7 @@
                                 class="img-fluid" alt="MAERSK">
                             <div class="portfolio-info">
                                 <h4>MAERSK</h4>
-                                <p>Pateforme Web</p>
+                                <p><?php _read('platform', $lang); ?> Web</p>
                                 <div class="portfolio-links">
                                     <a href="pages/maersk.html" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="MAERSK"><i class="bx bx-link"></i></a>
@@ -533,7 +559,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Distinctions &amp; Prix</h2>
+                    <h2><?php _read('honors', $lang); ?> &amp; Prix</h2>
                 </div>
 
                 <div class="row">
@@ -588,19 +614,19 @@
                         <div class="info">
                             <div class="address">
                                 <i class='bx bx-current-location'></i>
-                                <h4>Adresse :</h4>
+                                <h4><?php _read('address', $lang); ?> :</h4>
                                 <p>Angré Cocody, Abidjan, Côte-d'Ivoire</p>
                             </div>
 
                             <div class="email">
                                 <i class='bx bxs-envelope'></i>
-                                <h4>Email :</h4>
+                                <h4><?php _read('email', $lang); ?> :</h4>
                                 <p>agbegermain@gmail.com</p>
                             </div>
 
                             <div class="phone">
                                 <i class='bx bxs-mobile-vibration'></i>
-                                <h4>Téléphone :</h4>
+                                <h4><?php _read('phone', $lang); ?> :</h4>
                                 <p>+225 07 49 01 29 66</p>
                             </div>
 
@@ -610,23 +636,27 @@
 
                     <div class="col-lg-8 mt-5 mt-lg-0">
 
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form action="contact.php" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
+                                    <label for="name"></label>
                                     <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Votre nom" required>
+                                                                     placeholder="<?php _read('name', $lang); ?>" required>
                                 </div>
                                 <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <label for="email"></label>
                                     <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Votre adresse email" required>
+                                                                      placeholder="<?php _read('email-m', $lang); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
+                                <label for="subject"></label>
                                 <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="Votre sujet" required>
+                                                                    placeholder="<?php _read('subject', $lang); ?>" required>
                             </div>
                             <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="5" placeholder="Votre message"
+                                <label for="message"></label>
+                                <textarea class="form-control" name="message" id="message" rows="5" placeholder="<?php _read('message', $lang); ?>"
                                     required></textarea>
                             </div>
                             <div class="my-3">
@@ -634,7 +664,7 @@
                                 <div class="error-message"></div>
                                 <div class="sent-message">Your message has been sent. Thank you!</div>
                             </div>
-                            <div class="text-center"><button type="submit">Envoyer</button></div>
+                            <div class="text-center"><button type="submit"><?php _read('send', $lang); ?></button></div>
                         </form>
 
                     </div>
@@ -666,6 +696,19 @@
 
     <!-- Template Main JS File -->
     <script src="js/main.js"></script>
+
+    <script>
+        function getFlagEmoji(countryCode) {
+            const codePoints = countryCode
+                .toUpperCase()
+                .split('')
+                .map(char => 127397 + char.charCodeAt(0));
+            return String.fromCodePoint(...codePoints);
+        }
+
+        document.getElementById('FR').innerHTML = getFlagEmoji('FR');
+        document.getElementById('EN').innerHTML = getFlagEmoji('US');
+    </script>
 
 </body>
 

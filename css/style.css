@@ -5,6 +5,7 @@
 body {
     font-family: "Open Sans", sans-serif;
     color: #272829;
+    scroll-behavior: smooth;
 }
 
 a {
@@ -251,8 +252,8 @@ h6 {
 
 .mobile-nav-toggle {
     position: fixed;
-    right: 10px;
-    top: 10px;
+    right: 50px;
+    top: 0px;
     z-index: 9998;
     border: 0;
     background: none;

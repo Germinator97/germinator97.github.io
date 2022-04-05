@@ -1,80 +1,94 @@
-(function () {
-  "use strict";
+document.getElementById("submit").addEventListener("click", function(e){
+  e.preventDefault();
 
-  let forms = document.querySelectorAll('.php-email-form');
+  $('#loader-1').css("display","");
+  $('#loader-2').css("display","");
+  $('#loader-3').css("display","");
+  $('#submit-text').css("display","none");
+  $('#submit').attr("disabled", "disabled");
 
-  forms.forEach( function(e) {
-    e.addEventListener('submit', function(event) {
-      event.preventDefault();
+  let name = $('#name').val();
+  let email = $('#email').val();
+  let subject = $('#subject').val();
+  let message = $('#message').val();
 
-      let thisForm = this;
+  let uri = document.getElementById('form-contact').action;
 
-      let action = thisForm.getAttribute('action');
-      let recaptcha = thisForm.getAttribute('data-recaptcha-site-key');
-      
-      if( ! action ) {
-        displayError(thisForm, 'The form action property is not set!')
+  let xhr = http();
+
+  xhr.onprogress = function (progress) { }
+
+  xhr.onreadystatechange = function(state) {
+    let DONE = (typeof XMLHttpRequest.DONE !== 'undefined') ? XMLHttpRequest.DONE : 4;
+
+    if (xhr.readyState === DONE && xhr.status === 200) {
+      let response = xhr.response;
+
+      if (response.includes('CLIENT: 250 2.0.0 OK')) {
+        displaySuccess('Email has sent successfully');
+        button();
+      }
+      else {
+        displayError('Email has not sent successfully');
+        button();
+      }
+    }
+
+    else if (xhr.readyState === DONE && xhr.status !== 200) {
+      displaySuccess('Error');
+      button();
+    }
+
+  };
+
+  xhr.onload = function (load) { }
+
+  xhr.onerror = function (error) { }
+
+  xhr.open("POST", uri, true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  xhr.send('name=' + name + '&email=' + email + '&subject=' + subject + '&message=' + message);
+});
+
+function button() {
+  $('#loader-1').css("display","none");
+  $('#loader-2').css("display","none");
+  $('#loader-3').css("display","none");
+  $('#submit-text').css("display","");
+  $('#submit').removeAttr("disabled");
+}
+
+function displayError(message) {
+  document.querySelector('.loading').classList.remove('d-block');
+  document.querySelector('.error-message').innerHTML = message;
+  document.querySelector('.error-message').classList.add('d-block');
+}
+
+function displaySuccess(message) {
+  document.querySelector('.loading').classList.remove('d-block');
+  document.querySelector('.sent-message').innerHTML = message;
+  document.querySelector('.sent-message').classList.add('d-block');
+}
+
+function http() {
+  let xmlhttp = null;
+
+  if (window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest();
+  } else {
+    for (let a = ["MSXML2.XmlHttp.6.0", "MSXML2.XmlHttp.5.0", "MSXML2.XmlHttp.4.0", "MSXML2.XmlHttp.3.0", "MSXML2.XmlHttp.2.0", "Microsoft.XmlHttp"], b = 0; b < a.length; b++) {
+      try {
+        xmlhttp = new ActiveXObject(a[b]);
+        break;
+      } catch (error) {
+        this.error.message = error.name;
+        this.error.description = error.message;
         return;
       }
-      thisForm.querySelector('.loading').classList.add('d-block');
-      thisForm.querySelector('.error-message').classList.remove('d-block');
-      thisForm.querySelector('.sent-message').classList.remove('d-block');
-
-      let formData = new FormData( thisForm );
-
-      if ( recaptcha ) {
-        if(typeof grecaptcha !== "undefined" ) {
-          grecaptcha.ready(function() {
-            try {
-              grecaptcha.execute(recaptcha, {action: 'php_email_form_submit'})
-              .then(token => {
-                formData.set('recaptcha-response', token);
-                php_email_form_submit(thisForm, action, formData);
-              })
-            } catch(error) {
-              displayError(thisForm, error)
-            }
-          });
-        } else {
-          displayError(thisForm, 'The reCaptcha javascript API url is not loaded!')
-        }
-      } else {
-        php_email_form_submit(thisForm, action, formData);
-      }
-    });
-  });
-
-  function php_email_form_submit(thisForm, action, formData) {
-    fetch(action, {
-      method: 'POST',
-      body: formData,
-      headers: {'X-Requested-With': 'XMLHttpRequest'}
-    })
-    .then(response => {
-      if( response.ok ) {
-        return response.text()
-      } else {
-        throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
-      }
-    })
-    .then(data => {
-      thisForm.querySelector('.loading').classList.remove('d-block');
-      if (data.trim() == 'OK') {
-        thisForm.querySelector('.sent-message').classList.add('d-block');
-        thisForm.reset(); 
-      } else {
-        throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
-      }
-    })
-    .catch((error) => {
-      displayError(thisForm, error);
-    });
+    }
+    xmlhttp.setRequestHeader("Accept", "*/*");
   }
 
-  function displayError(thisForm, error) {
-    thisForm.querySelector('.loading').classList.remove('d-block');
-    thisForm.querySelector('.error-message').innerHTML = error;
-    thisForm.querySelector('.error-message').classList.add('d-block');
-  }
-
-})();
+  return xmlhttp;
+}

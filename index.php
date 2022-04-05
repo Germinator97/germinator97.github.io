@@ -76,7 +76,7 @@
                 <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-wallet"></i> <span><?php _read('projects', $lang); ?></span></a>
                 </li>
                 <li><a href="#services" class="nav-link scrollto"><i class="bx bxs-graduation"></i>
-                        <span><?php _read('honors', $lang); ?></span></a></li>
+                        <span><?php _read('awards', $lang); ?></span></a></li>
                 <!-- <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li> -->
             </ul>
         </nav>
@@ -129,7 +129,7 @@
                                         <span>+225 07 49 01 29 66</span></li>
                                     <li><i class="bx bx-chevron-right"></i> <strong><?php _read('address', $lang); ?> :</strong> <span>Abidjan,
                                             Côte-d'Ivoire</span></li>
-                                    <li><i class="bx bx-chevron-right"></i> <strong>Employeur :</strong>
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('employer', $lang); ?> :</strong>
                                         <span>CinetPay</span></li>
                                 </ul>
                             </div>
@@ -295,17 +295,16 @@
                             </ul>
                         </div>
 
-                        <h3 class="resume-title"><?php _read('others', $lang); ?></h3>
+                        <h3 class="resume-title"><?php _read('various', $lang); ?></h3>
                         <div class="resume-item">
-                            <h4>Divers </h4>
-                            <p>Écoute Active, Bonne Communication, Motivation, Curiosité, Bonne Capacité de Rédaction de
-                                Documents, Ingéniosité</p>
+                            <h4><?php _read('various', $lang); ?> </h4>
+                            <p><?php _read('various-m', $lang); ?></p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <h3 class="resume-title"><?php _read('experience', $lang); ?></h3>
                         <div class="resume-item">
-                            <h4><?php _read('studies', $lang); ?> &amp; Développements</h4>
+                            <h4><?php _read('studies', $lang); ?> &amp; <?php _read('dev-m', $lang); ?></h4>
                             <h5>2020 - <?php _read('today', $lang); ?></h5>
                             <p><em>CinetPay, Abidjan, Côte-d'Ivoire </em></p>
                             <ul>
@@ -340,8 +339,8 @@
                             </ul>
                         </div>
                         <div class="resume-item">
-                            <h4>Loisirs </h4>
-                            <p>Football, Volleyball, Tennis, Basketball, Musique, Programmation</p>
+                            <h4><?php _read('hobbies', $lang); ?> </h4>
+                            <p><?php _read('hobbies-m', $lang); ?></p>
                         </div>
                     </div>
                 </div>
@@ -360,7 +359,7 @@
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item">
+                    <!-- <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
                             <img src="images/assurance.jpeg" class="img-fluid" alt="Mon Assurance (ASA-CI)">
                             <div class="portfolio-info">
@@ -389,7 +388,7 @@
                         </div>
                     </div>
 
-                    <!-- <div class="col-lg-4 col-md-6 portfolio-item">
+                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
                             <img src="images/digster.jpeg" class="img-fluid" alt="Digster">
                             <div class="portfolio-info">
@@ -448,7 +447,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
-                            <img src="images/8aDix.png" class="img-fluid" alt="8aDix">
+                            <img src="images/8aDix.jpeg" class="img-fluid" alt="8aDix">
                             <div class="portfolio-info">
                                 <h4>8aDix</h4>
                                 <p>Application Mobile</p>
@@ -492,7 +491,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
-                            <img src="https://engineering.fb.com/wp-content/uploads/2012/12/javascript-illustration.png"
+                            <img src="images/javascript.png"
                                 class="img-fluid" alt="Trombinoscope">
                             <div class="portfolio-info">
                                 <h4>CinetPay Seamless</h4>
@@ -511,7 +510,7 @@
                             <img src="images/sococe.jpeg" class="img-fluid" alt="Trombinoscope">
                             <div class="portfolio-info">
                                 <h4>SOCOCE</h4>
-                                <p>Pateforme Web & Mobile</p>
+                                <p><?php _read('platform', $lang); ?> Web & Mobile</p>
                                 <div class="portfolio-links">
                                     <a href="pages/sococe.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="SOCOCE"><i class="bx bx-link"></i></a>
                                 </div>
@@ -521,7 +520,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
-                            <img src="https://mae.cinetpay.africa/assets/img/banner1.jpg" class="img-fluid" alt="MAE">
+                            <img src="images/mae.jpeg" class="img-fluid" alt="MAE">
                             <div class="portfolio-info">
                                 <h4>MAE</h4>
                                 <p><?php _read('platform', $lang); ?> Web</p>
@@ -535,7 +534,7 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
-                            <img src="https://www.maersk.com/~/media_sc9/maersk/solutions/transportation-services/images/transportation-services_illustration.svg?w=1000&hash=F68E778D455E2B30243A7458F0C2445C"
+                            <img src="images/maersk.svg"
                                 class="img-fluid" alt="MAERSK">
                             <div class="portfolio-info">
                                 <h4>MAERSK</h4>
@@ -559,7 +558,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2><?php _read('honors', $lang); ?> &amp; Prix</h2>
+                    <h2><?php _read('awards', $lang); ?> &amp; <?php _read('prizes', $lang); ?></h2>
                 </div>
 
                 <div class="row">
@@ -636,7 +635,7 @@
 
                     <div class="col-lg-8 mt-5 mt-lg-0">
 
-                        <form action="contact.php" method="post" role="form" class="php-email-form">
+                        <form action="contact.php" method="post" role="form" class="php-email-form" id="form-contact" name="form-contact">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label for="name"></label>
@@ -660,11 +659,18 @@
                                     required></textarea>
                             </div>
                             <div class="my-3">
-                                <div class="loading">Loading</div>
+                                <div class="loading"><?php _read('loading', $lang); ?></div>
                                 <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                                <div class="sent-message"><?php _read('sent', $lang); ?></div>
                             </div>
-                            <div class="text-center"><button type="submit"><?php _read('send', $lang); ?></button></div>
+                            <div class="text-center">
+                                <button id="submit" type="submit" name="submit" class="btn bg-gradient-info my-4 mb-2">
+                                    <span id="loader-1" class="spinner-grow spinner-grow-sm" role="status" style="display: none"></span>
+                                    <span id="loader-2" class="spinner-grow spinner-grow-sm" role="status" style="display: none"></span>
+                                    <span id="loader-3" class="spinner-grow spinner-grow-sm" role="status" style="display: none"></span>
+                                    <span id="submit-text"><?php _read('send', $lang); ?></span>
+                                </button>
+                            </div>
                         </form>
 
                     </div>
@@ -681,6 +687,8 @@
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class='bx bx-up-arrow-alt'></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- Vendor JS Files -->
     <script src="js/aos.js"></script>

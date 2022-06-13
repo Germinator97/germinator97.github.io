@@ -97,7 +97,7 @@
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex flex-column justify-content-center">
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
-            <h1>AGBETOGOR Germain</h1>
+            <h1>AGBETOGOR Germain <?php echo getenv("MAILERTOGO_DOMAIN", true) ?></h1>
             <h1 class="mt-4" style="color: #0563bb">Germinator</h1>
             <p><?php _read('me', $lang); ?> <span class="typed"
                     data-typed-items="<?php _read('dev', $lang); ?> Web, <?php _read('dev', $lang); ?> API, <?php _read('dev', $lang); ?> Mobile"></span></p>

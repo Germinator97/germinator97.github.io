@@ -1,5 +1,10 @@
 <?php
 
+    $dateOfBirth = "28-05-1997";
+    $today = date("Y-m-d");
+    $diff = date_diff(date_create($dateOfBirth), date_create($today));
+    $age = $diff->format('%y');
+
     if ($_POST) {
         $lang = $_POST['lang'];
     }
@@ -30,7 +35,11 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="images/favicon.png" rel="icon">
+    <link href="/images/favicon.png" rel="icon">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon.png">
 
     <!-- Google Fonts -->
     <link
@@ -77,7 +86,7 @@
                 </li>
                 <li><a href="#services" class="nav-link scrollto"><i class="bx bxs-graduation"></i>
                         <span><?php _read('awards', $lang); ?></span></a></li>
-                <!-- <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li> -->
+                <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
             </ul>
         </nav>
         <!-- .nav-menu -->
@@ -88,15 +97,13 @@
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex flex-column justify-content-center">
         <div class="container" data-aos="zoom-in" data-aos-delay="100">
-            <h1>Agbetogor Germain</h1>
+            <h1>AGBETOGOR Germain</h1>
             <h1 class="mt-4" style="color: #0563bb">Germinator</h1>
             <p><?php _read('me', $lang); ?> <span class="typed"
                     data-typed-items="<?php _read('dev', $lang); ?> Web, <?php _read('dev', $lang); ?> API, <?php _read('dev', $lang); ?> Mobile"></span></p>
             <div class="social-links">
                 <a href="#" class="twitter" target="_blank"><i class="bx bxl-twitter"></i></a>
-                <!-- <a href="#" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a> -->
-                <!-- <a href="#" class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a> -->
-                <a href="#" class="google-plus" target="_blank"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="skype" target="_blank"><i class="bx bxl-skype"></i></a>
                 <a href="https://www.linkedin.com/in/germain-agbetogor" class="linkedin" target="_blank"><i
                         class="bx bxl-linkedin"></i></a>
             </div>
@@ -116,7 +123,7 @@
 
                 <div class="row">
                     <div class="col-lg-4">
-                        <img src="images/profile.jpg" class="img-fluid" alt="">
+                        <img src="images/profile.jpg" class="img-fluid" alt="" style="border-radius: 1rem;">
                     </div>
                     <div class="col-lg-8 pt-4 pt-lg-0 content">
                         <h3><?php _read('dev', $lang); ?> FullStack Web &amp; Mobile.</h3>
@@ -124,7 +131,7 @@
                             <div class="col-lg-6">
                                 <ul>
                                     <li><i class="bx bx-chevron-right"></i> <strong><?php _read('birthday', $lang); ?> :</strong>
-                                        <span>28 Mai 1997</span></li>
+                                        <span>28 <?php _read('month', $lang); ?> 1997</span></li>
                                     <li><i class="bx bx-chevron-right"></i> <strong><?php _read('phone', $lang); ?> :</strong>
                                         <span>+225 07 49 01 29 66</span></li>
                                     <li><i class="bx bx-chevron-right"></i> <strong><?php _read('address', $lang); ?> :</strong> <span>Abidjan,
@@ -135,7 +142,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <ul>
-                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('age', $lang); ?> :</strong> <span>24 <?php _read('old', $lang); ?></span>
+                                    <li><i class="bx bx-chevron-right"></i> <strong><?php _read('age', $lang); ?> :</strong> <span><?php echo $age; ?> <?php _read('old', $lang); ?></span>
                                     </li>
                                     <li><i class="bx bx-chevron-right"></i> <strong><?php _read('level', $lang); ?> :</strong> <span><?php _read('software', $lang); ?></span></li>
                                     <li><i class="bx bx-chevron-right"></i> <strong><?php _read('email', $lang); ?> :</strong>
@@ -359,48 +366,6 @@
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-                    <!-- <div class="col-lg-4 col-md-6 portfolio-item">
-                        <div class="portfolio-wrap">
-                            <img src="images/assurance.jpeg" class="img-fluid" alt="Mon Assurance (ASA-CI)">
-                            <div class="portfolio-info">
-                                <h4>Mon Assurance (ASA-CI)</h4>
-                                <p><?php _read('platform', $lang); ?> Web</p>
-                                <div class="portfolio-links">
-                                    <a href="pages/asa-ci.html" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Mon Assurance (ASA-CI)"><i
-                                            class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item">
-                        <div class="portfolio-wrap">
-                            <img src="images/olam.jpeg" class="img-fluid" alt="OLAM">
-                            <div class="portfolio-info">
-                                <h4>OLAM</h4>
-                                <p><?php _read('platform', $lang); ?> Web</p>
-                                <div class="portfolio-links">
-                                    <a href="pages/olam.html" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="OLAM"><i class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                     <div class="col-lg-4 col-md-6 portfolio-item">
-                        <div class="portfolio-wrap">
-                            <img src="images/digster.jpeg" class="img-fluid" alt="Digster">
-                            <div class="portfolio-info">
-                                <h4>Digster</h4>
-                                <p>Application Web</p>
-                                <div class="portfolio-links">
-                                    <a href="pages/portfolio-details.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="Digster"><i class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
                             <img src="images/oneci.jpeg" class="img-fluid" alt="ONECI">
@@ -461,6 +426,20 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item">
                         <div class="portfolio-wrap">
+                            <img src="/images/contact10.jpg" class="img-fluid" alt="Contact10">
+                            <div class="portfolio-info">
+                                <h4>Contact10</h4>
+                                <p>Application Mobile</p>
+                                <div class="portfolio-links">
+                                    <a href="pages/contact10.html" class="portfolio-details-lightbox"
+                                       data-glightbox="type: external" title="Contact10"><i class="bx bx-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 portfolio-item">
+                        <div class="portfolio-wrap">
                             <img src="images/trombinoscope.png" class="img-fluid" alt="Trombinoscope">
                             <div class="portfolio-info">
                                 <h4>CinetPay Trombinoscope</h4>
@@ -505,48 +484,6 @@
                         </div>
                     </div>
 
-                    <!-- <div class="col-lg-4 col-md-6 portfolio-item">
-                        <div class="portfolio-wrap">
-                            <img src="images/sococe.jpeg" class="img-fluid" alt="Trombinoscope">
-                            <div class="portfolio-info">
-                                <h4>SOCOCE</h4>
-                                <p><?php _read('platform', $lang); ?> Web & Mobile</p>
-                                <div class="portfolio-links">
-                                    <a href="pages/sococe.html" class="portfolio-details-lightbox" data-glightbox="type: external" title="SOCOCE"><i class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <div class="col-lg-4 col-md-6 portfolio-item">
-                        <div class="portfolio-wrap">
-                            <img src="images/mae.jpeg" class="img-fluid" alt="MAE">
-                            <div class="portfolio-info">
-                                <h4>MAE</h4>
-                                <p><?php _read('platform', $lang); ?> Web</p>
-                                <div class="portfolio-links">
-                                    <a href="pages/mae.html" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="MAE"><i class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item">
-                        <div class="portfolio-wrap">
-                            <img src="images/maersk.svg"
-                                class="img-fluid" alt="MAERSK">
-                            <div class="portfolio-info">
-                                <h4>MAERSK</h4>
-                                <p><?php _read('platform', $lang); ?> Web</p>
-                                <div class="portfolio-links">
-                                    <a href="pages/maersk.html" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="MAERSK"><i class="bx bx-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
@@ -561,7 +498,7 @@
                     <h2><?php _read('awards', $lang); ?> &amp; <?php _read('prizes', $lang); ?></h2>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
 
                     <div class="col-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box iconbox-blue">
@@ -593,7 +530,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
 
             </div>
         </section>

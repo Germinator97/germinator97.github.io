@@ -6,6 +6,9 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 if ($_POST) {
     $name = $_POST['name'];
     $from = $_POST['email'];
@@ -19,15 +22,15 @@ if ($_POST) {
 
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->isSMTP();
-        $mail->Host = 'smtp-mail.outlook.com';
+        $mail->Host = $_ENV['MAIL_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Username = 'germinator97@outlook.fr';
-        $mail->Password = 'qemdun-pYqty3-jebdyr';
+        $mail->Username = $_ENV['MAIL_USERNAME'];
+        $mail->Password = $_ENV['MAIL_PASSWORD'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('germinator97@outlook.fr');
-        $mail->addAddress('agbegermain@gmail.com', 'AGBETOGOR Germain');
+        $mail->setFrom($_ENV['MAIL_USERNAME']);
+        $mail->addAddress($_ENV['MAIL_ADDRESS'], $_ENV['MAIL_NAME']);
         $mail->addReplyTo($from, $name);
 
         $mail->isHTML(true);
@@ -38,6 +41,5 @@ if ($_POST) {
         $mail->send();
     }
 
-    catch (Exception $exception) {
-    }
+    catch (Exception $exception) {}
 }

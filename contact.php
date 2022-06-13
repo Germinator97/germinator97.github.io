@@ -9,9 +9,6 @@ require 'vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-echo $_ENV['MAIL_USERNAME'];
-echo $_ENV['MAIL_PASSWORD'];
-
 if ($_POST) {
     $name = $_POST['name'];
     $from = $_POST['email'];
@@ -40,6 +37,8 @@ if ($_POST) {
         $mail->Subject = $subject;
         $mail->Body = $content;
         $mail->AltBody = $content;
+
+        echo json_encode($mail) . "\n";
 
         $mail->send();
     }

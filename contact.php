@@ -9,6 +9,9 @@ require 'vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+echo $_ENV['MAIL_USERNAME'];
+echo $_ENV['MAIL_PASSWORD'];
+
 if ($_POST) {
     $name = $_POST['name'];
     $from = $_POST['email'];

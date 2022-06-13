@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable('.');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 if ($_POST) {

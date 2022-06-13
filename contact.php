@@ -26,7 +26,6 @@ if ($_POST) {
         $mail->Password = getenv("MAILERTOGO_SMTP_PASSWORD", true);
 
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-
         $mail->setFrom(getenv("MAILERTOGO_SMTP_USER", true));
         $mail->addAddress(getenv("MAILERTOGO_DOMAIN", true), getenv("MAILERTOGO_NAME", true));
         $mail->addReplyTo($from, $name);
@@ -35,8 +34,6 @@ if ($_POST) {
         $mail->Subject = $subject;
         $mail->Body = $content;
         $mail->AltBody = $content;
-
-        echo json_encode($mail);
 
         $mail->send();
     }

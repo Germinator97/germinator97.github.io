@@ -35,7 +35,7 @@ document.getElementById("submit").addEventListener("click", function(e){
     }
 
     else if (xhr.readyState === DONE && xhr.status !== 200) {
-      displaySuccess('Error');
+      displaySuccess('Error when sending email');
       button();
     }
 

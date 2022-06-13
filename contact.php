@@ -36,6 +36,8 @@ if ($_POST) {
         $mail->Body = $content;
         $mail->AltBody = $content;
 
+        echo json_encode($mail);
+
         $mail->send();
     }
 
